@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Fakhrusy Syakirin (Farus) — Visual Motion Designer</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            bg: '#FFFFFF',
+                            bgDark: '#000000',
+                            cardLight: '#F5F5F7',
+                            cardDark: '#121212',
+                            textLight: '#1D1D1F',
+                            textDark: '#F5F5F7',
+                            grayLight: '#86868B',
+                            grayDark: '#A1A1A6',
+                            blue: '#0066CC',
+                            blueHover: '#0077ED',
+                            borderLight: '#E5E5EA',
+                            borderDark: '#2C2C2E'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glassmorphism Navigation */
+        .nav-glass {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .dark .nav-glass {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Custom Scrollbar Global & Modal */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d1d6;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #3a3a3c;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a6;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #545458;
+        }
+
+        /* Card Hover Transformations */
+        .portfolio-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+    </style>
+</head>
+<body class="bg-apple-bg text-apple-textLight dark:bg-apple-bgDark dark:text-apple-textDark transition-colors duration-300 min-h-screen flex flex-col justify-between selection:bg-apple-blue selection:text-white">
+
+    <!-- Fixed Navigation Bar -->
+    <header class="sticky top-0 left-0 right-0 z-40 nav-glass border-b border-apple-borderLight/60 dark:border-apple-borderDark/60 transition-colors duration-300">
+        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between text-sm font-medium">
+            <!-- Brand Mark -->
+            <a href="#hero" class="tracking-tight text-base font-semibold hover:opacity-70 transition-opacity flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-apple-blue inline-block"></span>
+                farus
+            </a>
+
+            <!-- Navigation Anchors -->
+            <div class="flex items-center space-x-6 md:space-x-10 text-xs sm:text-sm">
+                <a href="#work" class="hover:text-apple-blue transition-colors">Work</a>
+                <a href="#about" class="hover:text-apple-blue transition-colors">About</a>
+                <a href="#contact" class="hover:text-apple-blue transition-colors">Contact</a>
+
+                <!-- Dark/Light Theme Toggle -->
+                <button id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-full hover:bg-apple-cardLight dark:hover:bg-apple-borderDark transition-colors">
+                    <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[80vh] flex flex-col justify-center px-6 overflow-hidden border-b border-apple-borderLight/40 dark:border-apple-borderDark/40">
+            <div class="max-w-5xl mx-auto w-full py-20 relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-apple-cardLight dark:bg-apple-cardDark border border-apple-borderLight dark:border-apple-borderDark text-xs text-apple-blue font-semibold mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-apple-blue"></span>
+                    Fakhrusy Syakirin — Visual Motion Designer
+                </div>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-apple-textLight dark:text-apple-textDark mb-6 leading-[1.08]">
+                    High-engagement motion design & visual post-production.
+                </h1>
+                <p class="text-lg sm:text-2xl text-apple-grayLight dark:text-apple-grayDark max-w-2xl font-normal leading-relaxed mb-10">
+                    5+ years of experience producing high-turnaround broadcast assets, 2D/3D motion, and digital marketing media for high-reach platforms.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 text-sm font-medium">
+                    <a href="#work" class="px-6 py-3.5 bg-apple-textLight text-white dark:bg-apple-textDark dark:text-black rounded-full hover:opacity-90 transition-opacity flex items-center gap-2">
+                        View Selected Work <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#contact" class="px-6 py-3.5 bg-apple-cardLight dark:bg-apple-cardDark border border-apple-borderLight dark:border-apple-borderDark rounded-full hover:bg-apple-borderLight/50 dark:hover:bg-apple-borderDark/50 transition-colors">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section id="work" class="max-w-7xl mx-auto px-6 py-20 overflow-hidden">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <h2 class="text-xs uppercase tracking-widest text-apple-grayLight dark:text-apple-grayDark font-semibold">Portfolio Showcase</h2>
+                    </div>
+                    <p class="text-3xl sm:text-4xl font-bold tracking-tight">Selected Motion Works</p>
+                </div>
+                <div class="flex items-center justify-between md:justify-end gap-6">
+                    <p class="text-xs text-apple-grayLight dark:text-apple-grayDark max-w-xs hidden sm:block">
+                        *Click any video card to open high-res video preview.
+                    </p>
+                    <!-- Slider Controls -->
+                    <div class="flex items-center gap-2">
+                        <button id="slidePrevBtn" onclick="scrollWorkSlider(-1)" aria-label="Previous Slide" class="p-2.5 rounded-full bg-apple-cardLight dark:bg-apple-cardDark border border-apple-borderLight dark:border-apple-borderDark hover:bg-apple-borderLight/50 dark:hover:bg-apple-borderDark/50 transition-colors">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                        <button id="slideNextBtn" onclick="scrollWorkSlider(1)" aria-label="Next Slide" class="p-2.5 rounded-full bg-apple-cardLight dark:bg-apple-cardDark border border-apple-borderLight dark:border-apple-borderDark hover:bg-apple-borderLight/50 dark:hover:bg-apple-borderDark/50 transition-colors">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apple-Style Horizontal Carousel Container -->
+            <div id="workSlider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none py-4 scroll-smooth -mx-6 px-6 sm:mx-0 sm:px-0">
+            </div>
+        </section>
+
+        <!-- About & Core Stack Section -->
+        <section id="about" class="border-t border-apple-borderLight dark:border-apple-borderDark bg-apple-cardLight/30 dark:bg-apple-cardDark/20 py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest text-apple-blue font-semibold mb-3">About Farus</h2>
+                        <h3 class="text-2xl font-bold mb-4">Background & Expertise</h3>
+                        <p class="text-apple-grayLight dark:text-apple-grayDark text-sm leading-relaxed mb-4">
+                            Motion Designer based in Jakarta, Indonesia with a Bachelor of Applied Science (B.A.Sc.) in Animation, Interactive Technology, Video Graphics and Special Effects from Sekolah Tinggi Multi Media MMTC Yogyakarta.
+                        </p>
+                        <p class="text-apple-grayLight dark:text-apple-grayDark text-sm leading-relaxed">
+                            Specialized in transforming brand concepts into engaging visual content that boosts viewer retention and maintains cross-channel consistency across streaming and social platforms.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest text-apple-blue font-semibold mb-3">Core Technical Stack</h2>
+                        <h3 class="text-2xl font-bold mb-4">Software & Capabilities</h3>
+                        <ul class="space-y-3 text-sm text-apple-textLight dark:text-apple-textDark">
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-apple-blue"></i> Adobe After Effects (2D/3D Motion & Visual FX)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-apple-blue"></i> Adobe Premiere Pro (Editing & Post-Production)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-apple-blue"></i> Adobe Illustrator & Photoshop (Vector & UI Assets)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-apple-blue"></i> CapCut (Fast-Turnaround Social Formats)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-apple-blue"></i> Storyboarding & Visual Compositing</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest text-apple-blue font-semibold mb-3">Experience Track</h2>
+                        <h3 class="text-2xl font-bold mb-4">Key Professional Roles</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-2 border-apple-blue pl-4 py-1">
+                                <h4 class="font-semibold text-sm">RCTI+</h4>
+                                <p class="text-xs text-apple-blue font-medium">Motion Designer (2021 - Present)</p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark mt-1">Broadcast promotional packages, 2D animations, and social marketing visuals.</p>
+                            </div>
+                            <div class="border-l-2 border-apple-borderLight dark:border-apple-borderDark pl-4 py-1">
+                                <h4 class="font-semibold text-sm">PT Gamatechno Indonesia</h4>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark">Corporate Branding Officer (2019 - 2020)</p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark mt-1">B2B product launch media, corporate visual identity systems, and print collateral.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Footer Section -->
+        <section id="contact" class="border-t border-apple-borderLight dark:border-apple-borderDark bg-apple-cardLight/50 dark:bg-apple-cardDark/30">
+            <div class="max-w-7xl mx-auto px-6 py-24 text-center">
+                <p class="text-xs uppercase tracking-widest text-apple-blue font-semibold mb-4">Contact & Inquiries</p>
+                <h2 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+                    Let’s build something in motion.
+                </h2>
+                <p class="text-apple-grayLight dark:text-apple-grayDark max-w-xl mx-auto text-base sm:text-lg mb-10">
+                    Open for motion design, broadcast graphics, and video post-production opportunities.
+                </p>
+
+                <!-- Action Button -->
+                <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="copyEmail()" class="px-8 py-4 bg-apple-blue text-white rounded-full font-medium hover:bg-apple-blueHover transition-colors flex items-center gap-2 shadow-lg shadow-blue-500/10">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        <span>farusmail@gmail.com</span>
+                    </button>
+                </div>
+                
+                <!-- Notification Toast for Email Copy -->
+                <div id="copyToast" class="opacity-0 transition-opacity duration-300 mt-4 text-xs font-mono text-apple-blue">
+                    ✓ Email copied to clipboard!
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-16 flex items-center justify-center space-x-8 text-sm font-medium text-apple-grayLight dark:text-apple-grayDark">
+                    <a href="https://www.linkedin.com/in/fakhrusysyakirin" target="_blank" rel="noopener" class="hover:text-apple-textLight dark:hover:text-apple-textDark transition-colors flex items-center gap-2">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-apple-borderLight dark:border-apple-borderDark py-8 text-center text-xs text-apple-grayLight dark:text-apple-grayDark">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 farus. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Modal Container with Vertical Scrollability -->
+    <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 p-3 sm:p-6 overflow-y-auto">
+        <!-- Click outside to close wrapper -->
+        <div class="fixed inset-0" onclick="closeModal()"></div>
+
+        <!-- Modal Dialog Box -->
+        <div class="relative w-full max-w-4xl max-h-[90vh] bg-apple-bg dark:bg-apple-cardDark rounded-2xl overflow-hidden border border-apple-borderLight dark:border-apple-borderDark shadow-2xl flex flex-col z-10 my-auto">
+            
+            <!-- Sticky Header -->
+            <div class="p-4 sm:p-5 border-b border-apple-borderLight dark:border-apple-borderDark flex items-center justify-between shrink-0 bg-apple-bg/95 dark:bg-apple-cardDark/95 backdrop-blur-sm z-20">
+                <div class="pr-4">
+                    <h3 id="modalTitle" class="font-semibold text-base sm:text-lg leading-snug">Project Title</h3>
+                    <p id="modalCategory" class="text-xs text-apple-grayLight dark:text-apple-grayDark mt-0.5">Category</p>
+                </div>
+                <button onclick="closeModal()" class="p-2 rounded-full hover:bg-apple-cardLight dark:hover:bg-apple-borderDark transition-colors shrink-0" aria-label="Close modal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable Modal Body (Video + Descriptions) -->
+            <div class="overflow-y-auto flex-1 divide-y divide-apple-borderLight/60 dark:divide-apple-borderDark/60">
+                <!-- Embedded Player Viewport -->
+                <div class="relative aspect-video bg-black flex items-center justify-center shrink-0">
+                    <div id="modalPlayerWrapper" class="w-full h-full"></div>
+                </div>
+
+                <!-- Description & Breakdown Content -->
+                <div class="p-5 sm:p-6 bg-apple-cardLight/30 dark:bg-apple-cardDark/40">
+                    <div id="modalDescription" class="leading-relaxed">
+                        <!-- Dynamic content injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky Modal Footer -->
+            <div class="px-5 py-3.5 bg-apple-cardLight dark:bg-apple-cardDark border-t border-apple-borderLight dark:border-apple-borderDark flex justify-end shrink-0 z-20">
+                <button onclick="closeModal()" class="px-5 py-2 text-xs sm:text-sm bg-apple-textLight text-white dark:bg-apple-textDark dark:text-black rounded-full font-medium hover:opacity-90 transition-opacity">
+                    Close Preview
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const videoList = [
+            { 
+                id: 'MQ8e2XQfcak', 
+                title: 'Sport Freemium Promo - RCTI+', 
+                category: 'Digital Promo', 
+                desc: 'A 30-second promotional commercial for RCTI+ free sports streaming featuring Futsal and Billiard live matches and clean UI mockups.',
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A 30-second promotional commercial and digital campaign asset for RCTI+, highlighting their free sports streaming vertical featuring national and international Futsal and Billiard tournaments (including live matches, news updates, and full highlights). The objective was to combine fast-paced sports editing with clean UI mockups and kinetic typography to drive app downloads.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for kinetic type integration, transitional graphic wipes, screen mockups layout, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design & Layout:</strong> Photoshop
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Digital Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'MiLhfKztvYM', 
+                title: 'Global Football Promo Campaign - RCTI+', 
+                category: 'Sports Promo', 
+                desc: 'A high-energy 30-second promotional commercial and digital campaign asset for RCTI+ Sports, highlighting coverage of elite international football leagues.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial and digital campaign asset for RCTI+ Sports, highlighting their comprehensive coverage of elite international football leagues (UEFA Champions League, La Liga, Bundesliga, FA Cup, and more). The spot blends high-impact kinetic typography, tournament branding matrices, and clean UI/UX device mockups to drive user engagement and app adoption.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for kinetic type integration, dynamic typographic scaling ("More Goals, More Drama"), tournament badge layout, UI screen framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design & Alignment:</strong> Photoshop
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Sports Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'Xe2yU6pb2jU', 
+                title: 'Live Radio & Interactive Chat Promo - RCTI+', 
+                category: 'Feature Promo', 
+                desc: 'A dynamic 30-second promotional spot and digital campaign asset for RCTI+ AUDIO+, showcasing live radio streaming and interactive live chat features.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A dynamic 30-second promotional spot and digital campaign asset for RCTI+ AUDIO+, showcasing the platform's live radio streaming and interactive live chat features. The spot focuses on user engagement, enabling listeners to make song requests, share personal stories, and connect with radio broadcasts in real time through clean mobile UI mockups and kinetic text animations.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for UI screen integration, smooth kinetic typography synchronization, device framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'tXIq5W-sqPk', 
+                title: 'Sportistive+ Celebrity Match Promo - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-energy promotional campaign spot for Sportistive+ showcasing their flagship celebrity badminton tournament event.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy promotional campaign spot for Sportistive+ (New Era of Sports) showcasing their flagship celebrity badminton tournament event. The spot combines bold kinetic typography, 3D stadium platform layouts, celebrity talent line-ups, and precise event scheduling matrices to drive hype and live streaming viewership on the RCTI+ SuperApp.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for kinetic type integration, dynamic 3D platform staging, talent card layouts, event schedule graphic packaging, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design & Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'MzPBlbYak14', 
+                title: 'NEWS+ Text to Speech Feature Promo - RCTI+', 
+                category: 'Feature Promo', 
+                desc: 'A 30-second promotional commercial and digital campaign asset for RCTI+ NEWS+, highlighting their text to speech feature.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                 30-second promotional commercial and digital campaign asset for RCTI+ NEWS+, highlighting their text to speech feature. The spot demonstrates a seamless new way to consume current news hands-free through interactive UI/UX screen mockups, dynamic audio wave visualizations, and crisp kinetic typography.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for UI screen integration, audio wave graphic overlays, kinetic typography synchronization, device framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'LiAUCb6q5ws', 
+                title: 'GAMES+ Casual Arcade & Rewards Promo - RCTI+', 
+                category: 'Feature Promo', 
+                desc: 'A high-energy 30-second promotional commercial and digital campaign asset for RCTI+ GAMES+, showcasing the in-app casual gaming arcade.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial and digital campaign asset for RCTI+ GAMES+, showcasing the in-app casual gaming arcade featuring popular titles, instant-play mechanics, and reward voucher systems designed to drive mobile user engagement and retention.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for UI screen integration, smooth kinetic typography synchronization, device framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'pjF91hXGmqc', 
+                title: 'Idul Fitri Special Campaign Promo - RCTI+', 
+                category: 'Seasonal Commercial', 
+                desc: 'A festive 30-second holiday commercial and digital campaign asset for RCTI+, celebrating Idul Fitri.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A festive 30-second holiday commercial and digital campaign asset for RCTI+, celebrating Idul Fitri with warm cultural illustrations, family greetings, and app-wide entertainment highlights to drive engagement during the festive season.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for festive kinetic typography, illustrative vector animation integration, mobile UI interface framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'Sd-vpfEfdcY', 
+                title: 'UEFA Euro 2024 Qualifiers Promo - RCTI+', 
+                category: 'Sports Promo', 
+                desc: 'A clean, high-impact promotional match spot for RCTI+, highlighting the UEFA Euro 2024 Qualifiers.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A clean, high-impact promotional match spot for RCTI+, highlighting the UEFA Euro 2024 Qualifiers with official tournament branding and precise broadcast scheduling.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for official tournament logo integration, match card layout design, kinetic typography synchronization, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Sports Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'H-cPAx68Csw', 
+                title: 'Indonesia International Open 2024 Billiards Tournament Promo - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-energy 25-second promotional commercial for the Indonesia International Open 2024.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 25-second promotional commercial for the Indonesia International Open 2024, showcasing the historic world-class billiards tournament held at Park Hyatt Jakarta with dynamic 3D graphic elements and live streaming details.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 3D logo animation, kinetic typography synchronization, tournament stats integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'n9F-RuDNrAg', 
+                title: 'Opening Ceremony Indonesia International Open 2024 Promo - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-energy 25-second promotional commercial for the opening ceremony Indonesia International Open 2024.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 25-second promotional commercial for the opening ceremony Indonesia International Open 2024, showcasing the historic world-class billiards tournament held at Park Hyatt Jakarta with dynamic 3D graphic elements and live streaming details.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 3D logo animation, kinetic typography synchronization, tournament stats integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'e8ik6kWyQ8U', 
+                title: 'FIFA Matchday 2023 Promo Campaign - RCTI+', 
+                category: 'Sports Promo', 
+                desc: 'A high-energy 30-second promotional commercial and digital campaign asset for RCTI+, highlighting the marquee FIFA Matchday 2023.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial and digital campaign asset for RCTI+, highlighting the marquee FIFA Matchday 2023 fixtures featuring the Indonesian National Team ("Skuat Garuda") against Palestine and Argentina.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for kinetic type synchronization, dynamic match card layouts, match schedule integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: '9xsQDOqWFn8', 
+                title: 'Sodok Bola Seleb Match Celebrity Billiards Promo - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-energy 30-second promotional commercial for RCTI+ Sports, highlighting the "Sodok Bola Seleb Match" celebrity billiards tournament.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial for RCTI+ Sports, highlighting the "Sodok Bola Seleb Match" celebrity billiards tournament featuring public figures like Reza Oktovian, Rachel Florencia, Berliana MS, and Aldy Maldini.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for neon kinetic typography, lower-third name cards, team lineup framing, event schedule layout, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'kiWIvInD3Ck', 
+                title: '"Bored Virus" Idul Fitri Campaign Promo - RCTI+', 
+                category: 'Seasonal Campaign', 
+                desc: 'A comedic 30-second animated campaign commercial for RCTI+.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A comedic 30-second animated campaign commercial for RCTI+ SuperApp, blending comic-style illustration, 2D character rigging, and dynamic kinetic typography to tackle holiday boredom ("Virus Bored") during family gatherings.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 2D character animation, rigging, comic book transition panels, kinetic type synchronization, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Campaign
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'cbPwi5oRVh4', 
+                title: '"Bored Virus" Ramadan Campaign Promo - RCTI+', 
+                category: 'Seasonal Campaign', 
+                desc: 'A comedic 30-second animated campaign commercial for RCTI+.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A comedic 30-second animated campaign commercial for RCTI+, utilizing humorous comic-book styling, 2D character rigging, and expressive kinetic typography to tackle pandemic or quarantine-style boredom.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 2D character animation, rigging, comic book transition panels, kinetic type synchronization, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Campaign
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'EgG044CKUyk', 
+                title: 'Yonex All England Open 2023 Badminton Championship Promo - RCTI+', 
+                category: 'Sports Promo', 
+                desc: 'A high-energy 30-second promotional commercial for RCTI+, highlighting the live streaming coverage, news updates, and exclusive podcasts for the prestigious.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial for RCTI+, highlighting the live streaming coverage, news updates, and exclusive podcasts for the prestigious Yonex All England Open Badminton Championships 2023.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for official tournament badge integration, kinetic typography synchronization, match schedule and news feed UI mockups, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Sports Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'pyWsDiKLvwc', 
+                title: 'Christmas & New Year Holiday Campaign Promo - RCTI+', 
+                category: 'Seasonal Campaign', 
+                desc: 'A festive 30-second holiday commercial and digital campaign asset for RCTI+ SuperApp, celebrating Christmas and the New Year.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A festive 30-second holiday commercial and digital campaign asset for RCTI+ SuperApp, celebrating Christmas and the New Year with dynamic kinetic typography, festive graphic overlays, and entertainment ecosystem highlights to drive year-end engagement and app adoption.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for holiday-themed kinetic typography, split-screen video wall transitions, UI app frame integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Campaign
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: '_9q1Ri-6C1s', 
+                title: 'The Indonesian Next Big Star Campaign - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-energy 30-second promotional commercial for The Indonesian Next Big Star (co-presented by RCTI+ and Spotify).', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial for The Indonesian Next Big Star (co-presented by RCTI+ and Spotify), showcasing the singing talent competition, judge lineups, and broadcast schedules to drive mobile streaming viewership.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 3D logo extrusion, kinetic typography synchronization, judge panel card layouts, event schedule integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'Z7P3epQLl6c', 
+                title: '3rd Anniversary Virtual Concert Promo - RCTI+', 
+                category: 'Event Commercial', 
+                desc: 'A high-concept 30-second promotional commercial for the RCTI+ 3rd Anniversary MusicVerse, celebrating the milestone event with a futuristic metaverse concert experience.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-concept 30-second promotional commercial for the RCTI+ 3rd Anniversary MusicVerse, celebrating the milestone event with a futuristic metaverse concert experience featuring multi-genre artist collaborations (Senja Verse, Popink Verse, Rock Verse, and Special Verse with Sezairi).
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 3D futuristic environment staging, metaverse tunnel layout, kinetic typography synchronization, artist card framing, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Event Commercial
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'U8OPlWbzkuU', 
+                title: 'Perodua Malaysia Masters 2022 Badminton Championship Promo - RCTI+', 
+                category: 'Sports Promo', 
+                desc: 'A high-energy 30-second promotional commercial for RCTI+, highlighting live tournament streaming, match highlights, and exclusive badminton podcasts.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A high-energy 30-second promotional commercial for RCTI+, highlighting live tournament streaming, match highlights, and exclusive badminton podcasts for the Perodua Malaysia Masters 2022.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for tournament logo integration, kinetic typography synchronization, app UI mockups, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Sports Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'uYRJckDfNoE', 
+                title: 'Music Feature Integration Promo - RCTI+ & TREBEL', 
+                category: 'Feature Promo', 
+                desc: 'A dynamic 30-second promotional campaign commercial for RCTI+ SuperApp, highlighting the integration of the TREBEL music streaming feature.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A dynamic 30-second promotional campaign commercial for RCTI+ SuperApp, highlighting the integration of the TREBEL music streaming feature to deliver diverse playlists, curated genres, and seamless audio entertainment within a single app.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for 3D device staging, floating UI screen framing, dynamic kinetic typography synchronization, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+ & TREBEL<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: '9TMoPgBg9wI', 
+                title: 'Sinetron AUDIO+ Series Feature Promo - RCTI+', 
+                category: 'Feature Promo', 
+                desc: 'A dynamic 30-second promotional commercial and digital campaign asset for RCTI+.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A dynamic 30-second promotional commercial and digital campaign asset for RCTI+, highlighting the launch of audio adaptations for popular Indonesian sinetrons (Ikatan Cinta, Tukang Ojek Pengkolan) through live-action narrative framing and app UI integration.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for UI screen mockup framing, floating holographic asset staging, kinetic typography synchronization, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Feature Promo
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'GvxcAvGgzow', 
+                title: 'Idul Fitri Holiday Campaign Promo - RCTI+', 
+                category: 'Seasonal Campaign', 
+                desc: 'A heartwarming 30-second seasonal commercial and digital campaign asset for RCTI+.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A heartwarming 30-second seasonal commercial and digital campaign asset for RCTI+, capturing the emotional reality of being away from home during Idul Fitri and highlighting how digital connection bridges the distance.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for kinetic typography synchronization, UI lock screen notification animations, seasonal branding elements, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Campaign
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 'Y1-pKOYNFvE', 
+                title: 'Ramadan Campaign Promo - RCTI+', 
+                category: 'Seasonal Campaign', 
+                desc: 'A comedic 30-second live-action and motion graphics commercial for RCTI+.', 
+                details: `
+                    <div class="space-y-5 text-apple-textLight dark:text-apple-textDark">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold tracking-wider text-apple-blue uppercase rounded-md bg-apple-blue/10 dark:bg-apple-blue/20 mb-2">Overview</span>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                A comedic 30-second live-action and motion graphics commercial for RCTI+, illustrating the humorous struggles of daily routines during Ramadan and highlighting how the app acts as the ultimate digital companion.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-apple-borderLight/80 dark:border-apple-borderDark/80">
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> My Role
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    Motion Designer & Animator — Responsible for title card design, kinetic typography synchronization, app UI frame mockup integration, and final compositing.
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Tools & Stack
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion & Compositing:</strong> After Effects<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">3D Work:</strong> Element 3D<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Design Layout:</strong> Photoshop, Illustrator
+                                </p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-apple-bg dark:bg-apple-bgDark/60 border border-apple-borderLight/60 dark:border-apple-borderDark/60">
+                                <p class="font-semibold text-xs text-apple-blue uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="award" class="w-3.5 h-3.5"></i> Credits
+                                </p>
+                                <p class="text-xs text-apple-grayLight dark:text-apple-grayDark leading-relaxed">
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Brand:</strong> RCTI+<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Motion Design:</strong> Fakhrusy Syakirin<br>
+                                    <strong class="text-apple-textLight dark:text-apple-textDark font-medium">Project Type:</strong> Seasonal Campaign
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        function buildSliderCards() {
+            const container = document.getElementById('workSlider');
+            if (!container) return;
+
+            container.innerHTML = videoList.map((item, index) => `
+                <div class="portfolio-card group cursor-pointer snap-start flex-shrink-0 w-[85vw] sm:w-[460px] lg:w-[520px]" onclick="openModal('${item.id}', ${index})">
+                    <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-apple-cardLight dark:bg-apple-cardDark mb-4 border border-apple-borderLight dark:border-apple-borderDark">
+                        <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" 
+                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${item.id}/mqdefault.jpg';"
+                             alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                            <div class="w-14 h-14 rounded-full bg-apple-blue/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <i data-lucide="play" class="w-6 h-6 fill-white ml-0.5"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-[11px] font-medium text-white flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-apple-blue"></span> ${item.category}
+                        </div>
+                    </div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold group-hover:text-apple-blue transition-colors">${item.title}</h3>
+                            <p class="text-xs text-apple-grayLight dark:text-apple-grayDark mt-1 line-clamp-2">${item.desc}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        buildSliderCards();
+
+        function openModal(youtubeId, index) {
+            const modal = document.getElementById('videoModal');
+            const data = videoList[index] || { title: 'Motion Showcase', category: 'Motion Design', desc: '' };
+            
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalCategory').innerText = data.category;
+            
+            const descElement = document.getElementById('modalDescription');
+            if (data.details) {
+                descElement.innerHTML = data.details;
+            } else {
+                descElement.innerHTML = `<p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">${data.desc}</p>`;
+            }
+
+            const embedUrl = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`;
+
+            const wrapper = document.getElementById('modalPlayerWrapper');
+            wrapper.innerHTML = `
+                <iframe class="w-full h-full" 
+                    src="${embedUrl}" 
+                    title="${data.title}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            `;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden';
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const wrapper = document.getElementById('modalPlayerWrapper');
+            
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            wrapper.innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize Lucide Icons
+        if (window.lucide) lucide.createIcons();
+
+        // Slider Scroll Handler
+        function scrollWorkSlider(direction) {
+            const slider = document.getElementById('workSlider');
+            if (!slider) return;
+            const scrollAmount = slider.clientWidth * 0.75;
+            slider.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Theme Toggle Handler
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        
+        function setTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+            setTheme(true);
+        } else {
+            setTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            setTheme(!isDark);
+        });
+
+        // Email Clipboard Handler
+        function copyEmail() {
+            const email = "farusmail@gmail.com";
+            
+            const tempInput = document.createElement("input");
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('copyToast');
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Close modal on Escape key press
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
