@@ -110,6 +110,15 @@
         .portfolio-card:hover {
             transform: translateY(-4px) scale(1.01);
         }
+
+        /* Click and Drag Grabbing States */
+        #workSlider {
+            cursor: grab;
+            user-select: none;
+        }
+        #workSlider:active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 <body class="bg-apple-bg text-apple-textLight dark:bg-apple-bgDark dark:text-apple-textDark transition-colors duration-300 min-h-screen flex flex-col justify-between selection:bg-apple-blue selection:text-white">
@@ -1399,144 +1408,152 @@
             }
         ];
 
-        function buildSliderCards() {
-            const container = document.getElementById('workSlider');
-            if (!container) return;
-
-            container.innerHTML = videoList.map((item, index) => `
-                <div class="portfolio-card group cursor-pointer snap-start flex-shrink-0 w-[85vw] sm:w-[460px] lg:w-[520px]" onclick="openModal('${item.id}', ${index})">
-                    <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-apple-cardLight dark:bg-apple-cardDark mb-4 border border-apple-borderLight dark:border-apple-borderDark">
-                        <img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" 
-                             onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${item.id}/mqdefault.jpg';"
-                             alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                            <div class="w-14 h-14 rounded-full bg-apple-blue/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                <i data-lucide="play" class="w-6 h-6 fill-white ml-0.5"></i>
+        // Render Work Cards
+        function renderWorkCards() {
+            const slider = document.getElementById('workSlider');
+            slider.innerHTML = videoList.map((video, index) => `
+                <div class="portfolio-card shrink-0 w-[300px] sm:w-[380px] snap-start bg-apple-cardLight dark:bg-apple-cardDark rounded-2xl overflow-hidden border border-apple-borderLight dark:border-apple-borderDark flex flex-col cursor-pointer group"
+                     onclick="handleCardClick(${index})">
+                    <div class="relative aspect-video bg-black overflow-hidden pointer-events-none">
+                        <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-md flex items-center justify-center text-apple-textLight dark:text-apple-textDark shadow-lg transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="play" class="w-5 h-5 fill-current translate-x-0.5"></i>
                             </div>
                         </div>
-                        <div class="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-[11px] font-medium text-white flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-apple-blue"></span> ${item.category}
-                        </div>
                     </div>
-                    <div class="flex items-start justify-between">
+                    <div class="p-5 flex flex-col flex-1 justify-between pointer-events-none">
                         <div>
-                            <h3 class="text-lg font-semibold group-hover:text-apple-blue transition-colors">${item.title}</h3>
-                            <p class="text-xs text-apple-grayLight dark:text-apple-grayDark mt-1 line-clamp-2">${item.desc}</p>
+                            <span class="text-[11px] font-semibold text-apple-blue uppercase tracking-wider">${video.category}</span>
+                            <h3 class="font-semibold text-base sm:text-lg mt-1 group-hover:text-apple-blue transition-colors line-clamp-1">${video.title}</h3>
+                            <p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark mt-2 line-clamp-2 leading-relaxed">${video.desc}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-apple-borderLight/60 dark:border-apple-borderDark/60 flex items-center justify-between text-xs font-medium text-apple-blue">
+                            <span class="flex items-center gap-1.5">View Project <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
                         </div>
                     </div>
                 </div>
             `).join('');
-
-            if (window.lucide) lucide.createIcons();
+            lucide.createIcons();
         }
 
-        buildSliderCards();
+        // Initialize Click and Drag Functionality for Showcase Slider
+        const slider = document.getElementById('workSlider');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let hasMoved = false;
 
-        function openModal(youtubeId, index, pushState = true) {
-            const modal = document.getElementById('videoModal');
-            const data = videoList[index] || { title: 'Motion Showcase', category: 'Motion Design', desc: '' };
-            
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalCategory').innerText = data.category;
-            
-            const descElement = document.getElementById('modalDescription');
-            if (data.details) {
-                descElement.innerHTML = data.details;
-            } else {
-                descElement.innerHTML = `<p class="text-xs sm:text-sm text-apple-grayLight dark:text-apple-grayDark leading-relaxed">${data.desc}</p>`;
+        slider.addEventListener('pointerdown', (e) => {
+            isDown = true;
+            hasMoved = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('pointerleave', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('pointerup', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('pointermove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 1.5; // Scroll speed multiplier
+            if (Math.abs(walk) > 5) {
+                hasMoved = true;
             }
+            slider.scrollLeft = scrollLeft - walk;
+        });
 
-            const embedUrl = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`;
+        // Guard: Prevent modal opening if the user was dragging the slider
+        function handleCardClick(index) {
+            if (hasMoved) return;
+            openModal(index);
+        }
 
-            const wrapper = document.getElementById('modalPlayerWrapper');
-            wrapper.innerHTML = `
-                <iframe class="w-full h-full" 
-                    src="${embedUrl}" 
-                    title="${data.title}" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-                </iframe>
-            `;
+        // Slider Navigation Buttons
+        function scrollWorkSlider(direction) {
+            const cardWidth = 380 + 24; // card width + gap
+            slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+        }
 
+        // Modal Controls & Browser History / ESC Key Handling
+        function openModal(index) {
+            const video = videoList[index];
+            document.getElementById('modalTitle').innerText = video.title;
+            document.getElementById('modalCategory').innerText = video.category;
+            document.getElementById('modalDescription').innerHTML = video.details;
+            
+            const playerWrapper = document.getElementById('modalPlayerWrapper');
+            playerWrapper.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            
+            const modal = document.getElementById('videoModal');
             modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
             document.body.style.overflow = 'hidden';
 
-            if (pushState) {
-                history.pushState({ modalOpen: true, videoId: youtubeId, index: index }, '', `#project-${youtubeId}`);
-            }
-
-            if (window.lucide) lucide.createIcons();
+            // Push history state so back button closes modal
+            history.pushState({ modalOpen: true }, '');
+            lucide.createIcons();
         }
 
-        function closeModal(backHistory = false) {
+        function closeModal(goBack = true) {
             const modal = document.getElementById('videoModal');
-            const wrapper = document.getElementById('modalPlayerWrapper');
-            
-            modal.classList.remove('opacity-100');
+            if (modal.classList.contains('opacity-0')) return;
+
             modal.classList.add('opacity-0', 'pointer-events-none');
-            wrapper.innerHTML = '';
+            document.getElementById('modalPlayerWrapper').innerHTML = '';
             document.body.style.overflow = 'auto';
 
-            if (backHistory && window.location.hash.includes('#project-')) {
+            // If closed via UI (button, backdrop, ESC), pop history state if it was pushed
+            if (goBack && window.history.state && window.history.state.modalOpen) {
                 history.back();
             }
         }
 
-        // Handle Browser Back / Forward Button Navigation
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.modalOpen) {
-                openModal(e.state.videoId, e.state.index, false);
-            } else {
-                closeModal(false);
+        // Handle Browser Back Button (popstate)
+        window.addEventListener('popstate', (event) => {
+            const modal = document.getElementById('videoModal');
+            if (!modal.classList.contains('opacity-0')) {
+                closeModal(false); // pass false to avoid infinite history loop
             }
         });
 
-        // Initialize Lucide Icons
-        if (window.lucide) lucide.createIcons();
-
-        // Slider Scroll Handler
-        function scrollWorkSlider(direction) {
-            const slider = document.getElementById('workSlider');
-            if (!slider) return;
-            const scrollAmount = slider.clientWidth * 0.75;
-            slider.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-
-        // Theme Toggle Handler
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        
-        function setTheme(isDark) {
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
+        // Handle Escape Key Press to Close Modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
             }
-        }
+        });
 
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-            setTheme(true);
+        // Theme Toggle Setup
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
         } else {
-            setTheme(false);
+            htmlElement.classList.remove('dark');
         }
 
         themeToggleBtn.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.contains('dark');
-            setTheme(!isDark);
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
         });
 
-                // Close modal on Escape key press
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal(true);
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderWorkCards();
+            lucide.createIcons();
         });
     </script>
 </body>
