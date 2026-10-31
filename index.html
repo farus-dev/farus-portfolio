@@ -56,11 +56,12 @@
         }
     </script>
 
-    <!-- Google Fonts & Lucide Icons -->
+    <!-- Google Fonts, Lucide Icons & Three.js -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         body {
@@ -150,6 +151,9 @@
     <main class="flex-grow">
         <!-- Hero Section -->
         <section id="hero" class="relative min-h-[80vh] flex flex-col justify-center px-6 overflow-hidden border-b border-apple-borderLight/40 dark:border-apple-borderDark/40">
+            <!-- 3D Geometry Background Canvas Container -->
+            <div id="heroCanvasContainer" class="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-60 dark:opacity-40"></div>
+            
             <div class="max-w-5xl mx-auto w-full py-20 relative z-10">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-apple-cardLight dark:bg-apple-cardDark border border-apple-borderLight dark:border-apple-borderDark text-xs text-apple-blue font-semibold mb-6">
                     <span class="w-1.5 h-1.5 rounded-full bg-apple-blue"></span>
@@ -1530,6 +1534,78 @@
             }
         });
 
+        // Three.js Hero Geometry Background Animation
+        function initHero3D() {
+            const container = document.getElementById('heroCanvasContainer');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const geometry = new THREE.OctahedronGeometry(1.5,0); 
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x0066CC,
+                wireframe: true,
+                roughness: 0.5,
+                metalness: 0,
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+
+            // Set the initial custom height by scaling the Y axis (e.g., stretching it by 1.8x)
+            mesh.scale.y = 1.5;
+
+            scene.add(mesh);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0x0077ED, 3, 50);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            window.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (event.clientY - window.innerHeight / 2) * 0.001;
+            });
+
+            let clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                mesh.rotation.x = elapsedTime * 0;
+                mesh.rotation.y = elapsedTime * 0.2;
+
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                mesh.rotation.y += targetX;
+                mesh.rotation.y += targetY;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
         // Theme Toggle Setup
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         const htmlElement = document.documentElement;
@@ -1553,6 +1629,7 @@
         // Initialize on load
         window.addEventListener('DOMContentLoaded', () => {
             renderWorkCards();
+            initHero3D();
             lucide.createIcons();
         });
     </script>
