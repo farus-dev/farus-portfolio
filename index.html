@@ -246,7 +246,7 @@
             <div class="max-w-7xl mx-auto px-6 py-24 text-center">
                 <p class="text-xs uppercase tracking-widest text-apple-blue font-semibold mb-4">Contact & Inquiries</p>
                 <h2 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
-                    Let’s build something in motion.
+                    Ready to bring your ideas to life?
                 </h2>
                 <p class="text-apple-grayLight dark:text-apple-grayDark max-w-xl mx-auto text-base sm:text-lg mb-10">
                     Open for motion design, broadcast graphics, and video post-production opportunities.
@@ -254,15 +254,10 @@
 
                 <!-- Action Button -->
                 <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button onclick="copyEmail()" class="px-8 py-4 bg-apple-blue text-white rounded-full font-medium hover:bg-apple-blueHover transition-colors flex items-center gap-2 shadow-lg shadow-blue-500/10">
+                    <a href="mailto:farusmail@gmail.com" class="px-8 py-4 bg-apple-blue text-white rounded-full font-medium hover:bg-apple-blueHover transition-colors flex items-center gap-2 shadow-lg shadow-blue-500/15">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                         <span>farusmail@gmail.com</span>
-                    </button>
-                </div>
-                
-                <!-- Notification Toast for Email Copy -->
-                <div id="copyToast" class="opacity-0 transition-opacity duration-300 mt-4 text-xs font-mono text-apple-blue">
-                    ✓ Email copied to clipboard!
+                    </a>
                 </div>
 
                 <!-- Social Links -->
@@ -1539,25 +1534,7 @@
             setTheme(!isDark);
         });
 
-        // Email Clipboard Handler
-        function copyEmail() {
-            const email = "farusmail@gmail.com";
-            
-            const tempInput = document.createElement("input");
-            tempInput.value = email;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            const toast = document.getElementById('copyToast');
-            toast.classList.remove('opacity-0');
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-            }, 3000);
-        }
-
-        // Close modal on Escape key press
+                // Close modal on Escape key press
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal(true);
         });
